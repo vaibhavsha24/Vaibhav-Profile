@@ -155,12 +155,6 @@ export function AboutPage() {
                       ))}
                     </dl>
                   )}
-
-                  {exp.confidentialityNote && (
-                    <p className="border-t border-[var(--border-hairline)] pt-4 text-xs text-[var(--text-muted)]">
-                      {exp.confidentialityNote}
-                    </p>
-                  )}
                 </div>
               </div>
             </article>

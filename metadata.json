@@ -2,5 +2,7 @@
   "name": "Vaibhav Sharma — Android & Platform Engineer",
   "description": "Personal engineering website of Vaibhav Sharma, Lead Engineer at Samsung R&D Institute Bangalore and former Android Engineer at Probo. Focused on AOSP, NFC framework, Kotlin, Jetpack Compose, and system reliability.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

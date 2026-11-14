@@ -37,7 +37,6 @@ export interface ExperienceItem {
   summary: string;
   highlights: string[];
   outcomes?: { label: string; value: string }[];
-  confidentialityNote?: string;
 }
 
 export interface EducationItem {
@@ -132,8 +131,6 @@ export const EXPERIENCE_LIST: ExperienceItem[] = [
       'Developed NFC automation frameworks using Mobly, PN532 Dragon Reader, and custom test applications.',
       'Built AI-integrated internal developer tools to reduce manual engineering workload—including a RAG-based test recommendation system (leveraging code reviews and historical test artifacts) and an issue intelligence platform for automated classification and trend analysis.',
     ],
-    confidentialityNote:
-      'Public summary covers general engineering scope only; internal architecture and unreleased product details are intentionally omitted.',
   },
   {
     id: 'probo',
@@ -268,7 +265,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
       'Isolated UI state transitions cleanly from underlying framework callbacks using lifecycle-aware Coroutines and Flow components so state mismatches surface deterministically during bring-up debugging.',
     outcomeAndLearnings:
       'Strengthened end-to-end platform reliability across new Galaxy device bring-ups, connecting Settings UX directly to AOSP NFC services and hardware behavior.',
-    externalLinksNote: 'Internal platform work — confidential implementation details intentionally omitted.',
+    externalLinksNote: 'Platform engineering work at Samsung R&D Institute Bangalore.',
   },
   {
     id: 'nfc-automation-mobly-pn532',
@@ -289,7 +286,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
       'Separated deterministic hardware-bench regression suites from lightweight unit checks so physical PN532 fixtures run reliably on critical NFC paths without blocking rapid developer iteration.',
     outcomeAndLearnings:
       'Demonstrated how pairing Mobly orchestration with PN532 Dragon Reader rigs and custom test apps turns manual NFC verification into repeatable automated coverage.',
-    externalLinksNote: 'Public summary — proprietary test infrastructure details omitted.',
+    externalLinksNote: 'Hardware validation workflow at Samsung R&D Institute Bangalore.',
   },
   {
     id: 'android-performance-optimization',
@@ -359,7 +356,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
       'Grounded recommendations in historical code-review and test-artifact retrieval rather than open-ended LLM prompting so suggested tests stay anchored to real repository history.',
     outcomeAndLearnings:
       'Paired domain engineering context with retrieval-augmented workflows to reduce manual lookup time during testing and issue triage.',
-    externalLinksNote: 'Public summary — proprietary internal datasets and tooling infrastructure omitted.',
+    externalLinksNote: 'Internal developer tooling built at Samsung R&D Institute Bangalore.',
   },
 ];
 
