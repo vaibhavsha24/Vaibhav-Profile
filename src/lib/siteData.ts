@@ -60,6 +60,10 @@ export interface NowTopic {
   details?: string[];
 }
 
+const BASE_URL = import.meta.env.BASE_URL || '/';
+const withBase = (assetPath: string) =>
+  `${BASE_URL.endsWith('/') ? BASE_URL : `${BASE_URL}/`}${assetPath.replace(/^\/+/, '')}`;
+
 export const SITE_PROFILE = {
   name: 'Vaibhav Sharma',
   roleTitle: 'Lead Engineer at Samsung R&D Institute Bangalore',
@@ -70,7 +74,7 @@ export const SITE_PROFILE = {
     'Lead Android Engineer with 5 years of experience in Kotlin, Java, Android SDK, and Jetpack Compose—spanning high-traffic consumer apps for 50M+ users at Probo India to Android/AOSP NFC framework ownership, device bring-up, and AI-powered engineering tooling at Samsung R&D Institute.',
   aboutStory:
     'With 5 years of Android engineering experience across Tata Consultancy Services, Probo India, and Samsung R&D Institute, my work bridges consumer-facing mobile applications, proximity and connectivity systems (NFC, Beacon, GPS), Android framework integration, hardware validation, and AI-powered developer tooling.',
-  profilePhotoPath: '/assets/aistudio/Vaibhav_ff861ca4.png',
+  profilePhotoPath: withBase('assets/aistudio/Vaibhav_ff861ca4.png'),
   profilePhotoAlt: 'Portrait of Vaibhav Sharma, Lead Engineer at Samsung R&D Institute Bangalore',
   profilePhotoCaption:
     'Vaibhav Sharma — Lead Engineer at Samsung R&D Institute Bangalore.',
@@ -81,7 +85,7 @@ export const SITE_PROFILE = {
   githubHandle: 'github.com/vaibhavsha24',
   linkedinUrl: 'https://www.linkedin.com/in/vaibhavsharma24',
   linkedinHandle: 'linkedin.com/in/vaibhavsharma24',
-  resumeUrl: '/assets/aistudio/VaibhavResumeOct_0cc0f93c.pdf',
+  resumeUrl: withBase('assets/aistudio/VaibhavResumeOct_0cc0f93c.pdf'),
   coreDomains: [
     {
       index: '01',

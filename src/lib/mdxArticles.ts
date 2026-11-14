@@ -41,6 +41,11 @@ const mdxRawSources = import.meta.glob<string>('/src/content/articles/*.mdx', {
   eager: true,
 });
 
+const coverImageAssets = import.meta.glob<string>('/src/assets/images/*', {
+  eager: true,
+  import: 'default',
+});
+
 function buildArticleCatalog(): LoadedArticle[] {
   const loaded: LoadedArticle[] = [];
 
@@ -64,7 +69,9 @@ function buildArticleCatalog(): LoadedArticle[] {
       order: typeof fm.order === 'number' ? fm.order : 999,
       summary: fm.summary || '',
       featured: Boolean(fm.featured),
-      coverImage: fm.coverImage,
+      coverImage: fm.coverImage
+        ? coverImageAssets[fm.coverImage] || fm.coverImage
+        : undefined,
       coverCaption: fm.coverCaption,
       externalUrl: fm.externalUrl,
       externalLabel: fm.externalLabel,
