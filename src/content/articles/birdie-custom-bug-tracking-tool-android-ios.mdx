@@ -1,0 +1,42 @@
+---
+title: "Birdie Flies in to Save the Day: Custom Bug Tracking for Android & iOS Apps"
+slug: "birdie-custom-bug-tracking-tool-android-ios"
+date: "2025-05-20"
+category: "Engineering Productivity"
+status: "published"
+order: 2
+featured: true
+externalUrl: "https://engineering.probo.in/birdie-flies-in-to-save-the-day-our-custom-bug-tracking-tool-for-android-ios-apps-3834ab2bc434"
+externalLabel: "Read original article on Probo Engineering"
+coverImage: "/src/assets/images/hero_editorial_desk_1794658446328.jpg"
+coverCaption: "In-app screenshot capture and automated metadata diagnostics streamline mobile triage."
+summary: "How Probo replaced fragmented WhatsApp bug-reporting threads with Birdie—an in-house mobile diagnostics tool routing screenshot reports and device context straight to Slack and Kanban boards."
+---
+
+Before **Birdie**, internal and beta bug reporting at Probo flowed primarily through WhatsApp threads. While chat made it easy for anyone to drop a screenshot, it created fragmented communication, stripped away essential technical context, and caused slow, manual back-and-forth during triage.
+
+To eliminate that friction across mobile releases, Probo built **Birdie**—an in-house bug reporting and diagnostics tool embedded directly into the Android and iOS applications.
+
+## Why Chat-Based Bug Reporting Breaks Down
+
+When bugs arrive as ad-hoc screenshots inside messaging apps:
+
+- Engineers lack **app version, OS version, and device model** context without asking follow-up questions.
+- Duplicate reports and unresolved threads bury critical regressions in noisy chat history.
+- Reporters have no visibility into whether an issue has been triaged, assigned, or resolved.
+
+## How the Birdie Workflow Operates
+
+Birdie moved the entire reporting and diagnostic capture loop inside the application itself:
+
+1. **In-App Trigger & Screenshot Capture**: Users report issues directly from inside the app using screenshot-based bug capture.
+2. **Optional Context & Permissions**: Reporters can attach optional descriptions while the SDK handles required device permissions cleanly.
+3. **Automatic Technical Metadata**: Every submission automatically bundles the **app version, device model, and OS version**, removing manual guesswork.
+4. **Dedicated Slack Routing**: Reports flow straight into a dedicated Slack channel for immediate engineering visibility.
+5. **Kanban Triage & Status Updates**: Issues are categorized and tracked on a Kanban workflow, with status updates surfaced back inside the app.
+
+## Impact on Mobile Engineering Velocity
+
+Embedding diagnostics into the mobile client turned bug reporting from fragmented chat messages into actionable, reproducible tickets—shortening triage cycles and tightening the feedback loop across product, QA, and Android/iOS engineering.
+
+*Reference: Published by Probo Engineering (`engineering.probo.in`). Vaibhav Sharma designed and developed the Android-side Birdie in-house bug reporting and diagnostics tool during his tenure as Software Engineer at Probo India.*

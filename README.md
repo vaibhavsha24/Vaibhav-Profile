@@ -1,11 +1,35 @@
-<div align="center">
+# Vaibhav Sharma — Android & Platform Engineer
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Personal engineering website and writing journal for **Vaibhav Sharma** (Lead Engineer at Samsung R&D Institute Bangalore · Previously Android Engineer at Probo).
 
-  <h1>Built with AI Studio</h2>
+## Structure & Editable Data
+- **Profile, Experience, Skills, Case Studies & Now Data**: `src/lib/siteData.ts`
+  - Update `emailPlaceholder`, `githubUrlPlaceholder`, `linkedinUrlPlaceholder`, `locationPlaceholder`, and employment dates.
+  - Add personal reflections inside `[Editable placeholder: ...]` fields in `CASE_STUDIES`.
+- **Writing & Proposed Topics (MDX)**: `src/content/articles/*.mdx`
+  - Entries start with `status: "proposed"` so they are clearly displayed as unpublished outlines and excluded from `/rss.xml` and `/sitemap.xml`.
+  - Flip `status: "published"` and update `date` when an article is ready to publish.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Local Development
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+```bash
+npm install
+npm run dev
+```
 
-</div>
+Runs on `http://localhost:3000`.
+
+## Verification
+
+```bash
+npx --yes tsx --test src/lib/content.test.ts
+npm run lint
+npm run build
+```
+
+## Production Run
+
+```bash
+npm run build
+NODE_ENV=production npm start
+```

@@ -1,0 +1,38 @@
+---
+title: "Moving from Android application development to platform engineering"
+slug: "android-app-development-to-platform-engineering"
+date: "2026-09-14"
+category: "Career & Systems"
+status: "published"
+order: 7
+featured: false
+coverImage: "/src/assets/images/article_android_systems_1794658446131.jpg"
+coverCaption: "Across the boundary from consumer Jetpack Compose apps into AOSP system services and NFC hardware."
+summary: "Reflections on transitioning from proximity apps at TCS and 50M+ user consumer engineering at Probo India to Lead Engineer platform work at Samsung R&D Institute Bangalore."
+---
+
+Over the past five years, my path in Android engineering has moved steadily downward through the stack—from building location- and proximity-aware client apps at **Tata Consultancy Services**, to scaling high-traffic consumer features in **Kotlin** and **Jetpack Compose** for **50M+ users** at **Probo India**, to working as a **Lead Engineer at Samsung R&D Institute Bangalore** across Android platform layers, NFC Settings ownership, device bring-up, and hardware automation.
+
+Moving from consumer app engineering into Android platform and AOSP work changes your daily tools, feedback loops, and definition of "done." Yet the two worlds reinforce each other far more than most engineers expect.
+
+## What Transfers Directly
+
+Even though platform engineering introduces system services, hardware teams, and device bring-up cycles, core engineering instincts carry straight across:
+
+- **Obsession with Reliability & Lifecycle Hygiene**: Maintaining **99.5% crash-free users** and **99.8% crash-free sessions** on a consumer app teaches you to respect lifecycle boundaries, asynchronous **Coroutines / Flow** cancellation, and memory profiling with **LeakCanary** and **Android Profiler**. Those exact habits matter just as much inside Android Settings and system components.
+- **Clean Architecture Beyond Small Demos**: Scaling MVVM without letting `ViewModel` classes turn into bloated god objects pays off whether you are structuring a consumer Trading screen or coordinating UI, business logic, and framework callbacks inside system Settings.
+- **Tooling & Developer Productivity Mindset**: Building internal tools like **Birdie** at Probo trained me to notice repetitive human friction—a habit that carried straight into building **Mobly + PN532 Dragon Reader** NFC test automation and **RAG / LLM-assisted** test recommendation and issue intelligence tools at Samsung R&D.
+
+## What Changes Fundamentally
+
+At the same time, stepping into platform engineering shifts several mental models:
+
+1. **System Boundaries Replace Isolated Feature Modules**: In a consumer app, the Android OS is largely a stable backdrop defined by the public SDK. On the platform side, you are working directly across the boundary between Settings UI, Android framework services, Samsung-specific system APIs, and underlying hardware subsystems.
+2. **Hardware Bring-Up Replaces Instant Emulator Loops**: You cannot unit-test a physical NFC antenna or new-device bring-up sequence solely in software mocks. Debugging requires collaborating across software, hardware, and platform teams and validating real RF behavior with bench rigs.
+3. **Device-Wide Consequences**: A small state-sync edge case in a system preference or framework callback does not just affect one screen inside a single app—it shapes how every NFC-dependent experience on the device behaves.
+
+## Why Both Perspectives Sharpen Each Other
+
+Looking back across TCS (`Beacon`, `GPS`, `NFC`, `Room`, `Foreground Services`), Probo (`WebSocket`, `Compose`, performance & size optimization, `Birdie`), and Samsung R&D (`Android Framework`, `NFC Settings`, `Mobly`, `PN532`, `RAG`), the biggest advantage of crossing from apps into platform engineering is empathy across layers.
+
+Consumer app intuition keeps system-level work grounded in real user behavior and responsive UI states, while platform fluency removes the "black box" beneath the Android SDK. Understanding the whole stack—from a button tap in Jetpack Compose down to an RF transaction on physical hardware—makes every engineering decision sharper.

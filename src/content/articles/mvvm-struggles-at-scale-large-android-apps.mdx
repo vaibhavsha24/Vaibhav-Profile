@@ -1,0 +1,44 @@
+---
+title: "Why MVVM Struggles at Scale — And Keeping Large Android Apps Maintainable"
+slug: "mvvm-struggles-at-scale-large-android-apps"
+date: "2026-06-15"
+category: "Android Architecture"
+status: "published"
+order: 1
+featured: true
+externalUrl: "https://medium.com/@vaibhavsharma_13768/mvvm-works-great-for-small-apps-but-it-struggles-when-an-app-becomes-large-viewmodels-get-a5e4b6a91eab"
+externalLabel: "Read original article on Medium"
+coverImage: "/src/assets/images/article_android_systems_1794658446131.jpg"
+coverCaption: "Modular domain boundaries keep Android ViewModels focused on UI state rather than business sprawl."
+summary: "MVVM works great for small apps, but it struggles when an app becomes large: ViewModels get bloated, business logic leaks across layers, and testing becomes harder."
+---
+
+MVVM works great for small apps, but it struggles when an app becomes large: ViewModels get bloated, business logic leaks across presentation and data layers, and unit testing becomes brittle.
+
+When an Android codebase serves high-traffic consumer workflows across dozens of screens and multiple feature squads, pure MVVM without strict architectural boundaries stops protecting modularity and starts concentrating complexity inside oversized `ViewModel` classes.
+
+## The Honeymoon Phase vs. The Scaling Wall
+
+In a compact Android application, pairing a `ViewModel` with `StateFlow` or `LiveData` and a repository feels effortless. Each screen maps cleanly to one `ViewModel`, a handful of network or Room calls, and straightforward Jetpack Compose state observation.
+
+As the product grows, however, three predictable failure modes emerge:
+
+1. **Bloated ViewModels (God Classes)**: A single `ViewModel` begins coordinating multiple repositories, form validation, caching rules, analytics events, real-time socket streams, and navigation side effects.
+2. **Leaking Business Logic**: Domain rules migrate directly into UI presentation classes or data mappers, making behavior inconsistent across screens that share the same underlying rules.
+3. **Testing Bottlenecks**: Because the `ViewModel` accumulates heavy constructor dependencies and lifecycle couplings, writing fast, deterministic unit tests slows down dramatically.
+
+> When every new requirement gets appended to an existing ViewModel, architectural velocity decays quietly—one convenient helper method at a time.
+
+## Pairing MVVM with Clean Modular Boundaries
+
+The solution is rarely abandoning MVVM at the UI boundary. Jetpack Compose and Android Architecture Components work naturally with reactive `ViewModel` state holders. Instead, scaling safely requires constraining what a `ViewModel` is allowed to own:
+
+- **UI State Mapping Only**: Keep the `ViewModel` responsible for transforming domain outputs into immutable UI state and coordinating lifecycle-scoped coroutines.
+- **Explicit Domain Use Cases**: Move reusable business rules, validation, and multi-repository orchestration into small, testable domain interactors or use cases.
+- **Strict Feature Module Isolation**: Separate feature presentation modules from shared core networking, persistence (`Room`), and real-time socket layers so teams cannot accidentally import sibling feature internals.
+
+## Practical Outcomes on Production Codebases
+
+Applying modular boundaries alongside Kotlin migration and legacy cleanup in high-traffic Android codebases makes codebases easier to refactor safely—allowing teams to reduce redundant API calls, trim unused code from the APK, and sustain high crash-free reliability across releases.
+
+*Originally published on Medium by Vaibhav Sharma (`@vaibhavsharma_13768`).*

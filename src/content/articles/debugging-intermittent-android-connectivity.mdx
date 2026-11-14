@@ -1,0 +1,42 @@
+---
+title: "Debugging intermittent Android connectivity issues"
+slug: "debugging-intermittent-android-connectivity"
+date: "2026-07-08"
+category: "Reliability & Debugging"
+status: "published"
+order: 6
+featured: false
+coverImage: "/src/assets/images/article_ai_automation_1794658446797.jpg"
+coverCaption: "Isolating WebSocket reconnect storms, redundant API calls, and lifecycle leaks in production."
+summary: "Field notes from scaling real-time Android apps for 50M+ users: observing API failures without noise, scoping socket lifecycles cleanly, and eliminating wasted network traffic."
+---
+
+Intermittent connectivity bugs are the hardest category of mobile defects to diagnose because they almost never happen on an engineer's desk. On fast office Wi-Fi with a freshly launched debug build, REST calls succeed in 80 milliseconds and WebSocket streams stay connected indefinitely.
+
+In production across tens of millions of consumer devices—such as scaling real-time Trading and Growth flows at **Probo India** for **50M+ users**, or building proximity and sync-heavy workflows at **TCS**—the network environment is hostile. Commuters switch rapidly between LTE and congested Wi-Fi, background restrictions throttle sockets under Doze, and subtle retry bugs amplify small blips into cascading failures.
+
+## Observing Without Creating Log Noise
+
+The first step to fixing intermittent networking issues is seeing them clearly without drowning in telemetry.
+
+- **Structured Event & API Failure Logging**: Instead of scattering unstructured `Log.d` statements, capture normalized failure records (endpoint group, status/timeout class, screen/flow context, and connection state) so patterns show up clearly in internal analytics and **Firebase Crashlytics** non-fatal reports.
+- **Inspecting Real Wire Traffic**: Tools like **Charles Proxy** and **Postman** help verify whether a client is accidentally firing duplicate requests, ignoring cache headers, or sending malformed retry payloads before blaming the backend.
+- **Connecting Network Spikes to Memory & UI Jank**: Reconnect loops do not only waste bandwidth—they also trigger repeated JSON parsing and UI recompositions. Pairing network inspection with **Android Profiler** and **LeakCanary** quickly exposes whether a socket client or callback listener is leaking an `Activity` or `ViewModel` across rotations.
+
+## Socket Lifecycles Under Background & Network Transitions
+
+Persistent **WebSocket** connections are essential for live consumer feeds, yet they introduce lifecycle hazards that ordinary request-response REST calls do not have:
+
+1. **Orphaned Subscriptions**: If a screen subscribes to a live market or feed channel in `onStart()` or `ViewModel` init without deterministic teardown or lifecycle-aware **Kotlin Coroutines / Flow** collection, navigating back and forth can silently multiply active listeners.
+2. **Reconnect Storms**: When connectivity drops for five seconds, naive immediate retries from every open component hammer both device battery and server edge nodes simultaneously. Bounded exponential backoff with jitter keeps recovery calm.
+3. **Stale Snapshot Drift After Reconnect**: A socket that reconnects cleanly but misses state deltas during a brief offline window leaves the user staring at outdated numbers. Re-syncing an authoritative snapshot on reconnect—and deduplicating against existing state—prevents subtle UI corruption.
+
+## Eliminating Unnecessary API Calls
+
+One of the highest-leverage ways to improve perceived speed and reliability is simply making fewer network requests.
+
+While re-engineering critical user flows and real-time feed infrastructure at Probo, auditing request triggers uncovered redundant API calls fired during screen transitions and overlapping refresh events. Tightening caching boundaries with **Room** / in-memory state and eliminating duplicate fetches produced a **4% reduction in unnecessary API calls**, alongside Java-to-Kotlin cleanup that trimmed **2 MB** from the application size and helped sustain **99.5% crash-free users** and **99.8% crash-free sessions**.
+
+## Reliability Is Built in the Edge Cases
+
+Mobile users judge an app not by how smoothly it behaves on gigabit Wi-Fi, but by how gracefully it recovers on a crowded train with two bars of signal. Disciplined lifecycle scoping, failure observability, and ruthless elimination of redundant traffic turn intermittent connectivity from a mystery into an engineering problem you can measure and solve.
